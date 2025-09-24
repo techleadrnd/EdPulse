@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
@@ -68,7 +69,19 @@ function LoginForm() {
           }}
           className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] pr-12 text-richblack-5 outline-none"
         />
+        {/* <span
+          onClick={() => setShowPassword((prev) => !prev)}
+          className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+        >
+          {showPassword ? (
+            <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+          ) : (
+            <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+          )}
+        </span> */}
+
         <span
+          data-testid="toggle-password"
           onClick={() => setShowPassword((prev) => !prev)}
           className="absolute right-3 top-[38px] z-[10] cursor-pointer"
         >
@@ -78,6 +91,7 @@ function LoginForm() {
             <AiOutlineEye fontSize={24} fill="#AFB2BF" />
           )}
         </span>
+        
         <Link to="/forgot-password">
           <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
             Forgot Password

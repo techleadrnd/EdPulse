@@ -1,0 +1,23 @@
+[33mcommit d3ad3007cda7a002d97abbb98043ab6a9abe2be9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: techleadrnd <techleadrnd@gmail.com>
+Date:   Sun Sep 21 13:34:00 2025 +0100
+
+    test: add unit test for Course_Card component with mocked GetAvgRating and MemoryRouter
+
+[33mcommit 1593ff7b0bf65ec549bdf796fe447782d33a1a67[m
+Author: techleadrnd <techleadrnd@gmail.com>
+Date:   Sun Sep 21 12:54:01 2025 +0100
+
+    test: add initial unit test for IconBtn component using Vitest
+
+[33mcommit 7afe7d3de71d3e5a7763935f6114f1afabf14da7[m
+Author: techleadrnd <techleadrnd@gmail.com>
+Date:   Sun Sep 21 11:32:21 2025 +0100
+
+    Add frontend code
+
+[33mcommit 27ca508e88957205e662bf329f0b2038f2243edc[m
+Author: techleadrnd <techleadrnd@gmail.com>
+Date:   Sun Sep 21 11:03:07 2025 +0100
+
+    Add test text file
