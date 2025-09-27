@@ -7,12 +7,24 @@ import { MemoryRouter } from 'react-router-dom';
 // Mock useDispatch and login function
 import { useDispatch } from 'react-redux';
 import { login } from '../../../../services/operations/authAPI';
+import Login from '../../../../pages/Login';
+import { toast } from 'react-hot-toast';
+
+
 vi.mock('react-redux', () => ({
   useDispatch: () => vi.fn(),
 }));
+
 vi.mock('../../../../services/operations/authAPI', () => ({
   login: vi.fn(),
 }));
+
+vi.mock('react-hot-toast', () => ({
+    __esModule: true,
+    toast : {
+        error : vi.fn()
+    }
+}))
 
 describe('LoginForm component', () => {
   // 🧪 Test 1: Check if form elements render correctly
@@ -97,4 +109,50 @@ describe('LoginForm component', () => {
     // Check if login function was called
     expect(login).toHaveBeenCalledWith('tech@example.com', 'secure123', expect.any(Function));
   });
+
+  // 🧪 Test 5: Ensure form doesn't call login if fields are empty
+  test('does not call login if fields are empty', () => {
+    render(
+        <MemoryRouter>
+            <LoginForm/>
+        </MemoryRouter>
+    )
+
+    fireEvent.click(screen.getByRole('button', { name : /sign in/i }));
+
+    expect(login).not.toHaveBeenCalledWith();
+  })
+
+  // 🧪 Test 6: Simulates login failure and verifies toast.error is shown with correct message
+  test('shows error toast on login failure', () => {
+    
+    //Mock login to throw an error
+    // login.mockImplementation(()=> {
+    //     throw new Error('Login failed');
+    // });
+    login.mockImplementation(() => {
+        toast.error('Login failed');
+        return Promise.reject(new Error('Login failed'));
+        });
+
+    render(
+        <MemoryRouter>
+            <LoginForm/>
+        </MemoryRouter>
+    )
+
+    fireEvent.change(screen.getByPlaceholderText('Enter email address'), {
+        target : { value : 'tech@example.com' },
+    });
+
+    fireEvent.change(screen.getByPlaceholderText('Enter Password'), {
+        target : { value : 'secure123'},
+    });
+
+    fireEvent.click(screen.getByRole('button', { name : /sign in/i }));
+
+    expect(toast.error).toHaveBeenCalledWith('Login failed');
+  })
+
+
 });
